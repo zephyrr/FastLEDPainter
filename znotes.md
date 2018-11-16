@@ -58,7 +58,7 @@ component to 0 afterward at the same speed (for SV), or can fade clockwise or co
 
 There is a small difference in the configuration of the brush and the retained params in the canvas in terms of hue direection; the
 canvas is configured to fade hue cw or ccw, but when setting up the brush one can specify near or far path along the hue circle.
-[look at this again in more detail]
+(look at this again in more detail)
 
 # Overview
 
@@ -73,4 +73,16 @@ the location on each draw() call).  If the outer program just sets up the brush,
 on the Canvas - an animation will ensue.  Other differences can be done by changing the parameters of the brush (color, location, 
 fading params) between calls.
 
-I think multiple Brushes can be animated this way; perhaps multiple Canvases.
+The basic concept here is of moving single-LED brushes, which leave a trail of self fading LEDs - but each brush can leave 
+a different type of fading behind. Like different comets or fireworks, each with different fade dynamics.
+
+The Canvas is retained between cycles, unless manually cleared.
+
+I think multiple Brushes can be animated this way; perhaps multiple Canvases.  I think multiple brushes are pretty straightforward.
+I believe that each Brush would each overwrite a given pixel if there were multiple brushes passing the same pixel, last wins.
+
+The Canvas.transfer() method adds the converted HSV -> RGB values to the existing FastLED pixel array elements, 
+after clearing the latter each cycle.  More than one Canvas could be transferred after clearing the FastLED array after one
+clearing.  This uses wrap-around addition, but the NeoPixel version (same author) seems to do manually implemented saturated
+addition.
+
