@@ -82,7 +82,6 @@ I think multiple Brushes can be animated this way; perhaps multiple Canvases.  I
 I believe that each Brush would each overwrite a given pixel if there were multiple brushes passing the same pixel, last wins.
 
 The Canvas.transfer() method adds the converted HSV -> RGB values to the existing FastLED pixel array elements, 
-after clearing the latter each cycle.  More than one Canvas could be transferred after clearing the FastLED array after one
-clearing.  This uses wrap-around addition, but the NeoPixel version (same author) seems to do manually implemented saturated
-addition.
+after clearing the latter each cycle.  More than one Canvas could be transferred after clearing the FastLED array once.  
+This uses wrap-around addition, but the NeoPixel version (same author) seems to do manually implemented saturated addition.
 
